@@ -9,7 +9,13 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/yourdbname', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://suma:123@cluster0.wxldekr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', { useNewUrlParser: true, useUnifiedTopology: true })
+.then(()=>{
+    console.log("MongoDB Connected");
+})
+.catch(()=>{
+    console.log("Failed to connect mongoDB");
+})
 
 // Middleware
 app.use(cookieSession({
@@ -21,7 +27,7 @@ app.use(passport.session());
 
 // Passport Config
 passport.use(new GoogleStrategy({
-  clientID: 'YOUR_GOOGLE_CLIENT_ID',
+  clientID: '924025179828-cgrqcm6piomllg1u5tihimsa42cfkbi6.apps.googleusercontent.com',
   clientSecret: 'YOUR_GOOGLE_CLIENT_SECRET',
   callbackURL: '/auth/google/callback'
 }, async (accessToken, refreshToken, profile, done) => {
